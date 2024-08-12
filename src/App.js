@@ -1,6 +1,6 @@
 import './App.css';
 import { Auth } from "./components/auth"
-import { db } from "./config/firebase";
+import { db, auth } from "./config/firebase";
 import { getDocs, collection, doc, addDoc, deleteDoc, updateDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
@@ -39,7 +39,8 @@ function App() {
       await addDoc(moviesCollectionRef, {
         title: newMovieTitle,
         releaseDate: newReleaseDate,
-        receivedAnOscar: isNewMovieOscar
+        receivedAnOscar: isNewMovieOscar,
+        userId: auth?.currentUser.uid
       });
 
       getMovieList();
